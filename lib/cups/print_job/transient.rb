@@ -40,14 +40,14 @@ module Cups
       # Create a print job from a non-empty string. Takes optional printer argument, otherwise uses default.
       # As the tempfile is written to and closed upon initialization, an error will be raised if an empty
       # string is passed as the first argument.
-      def initialize(data_string, printer=nil)
+      def initialize(data_string, printer=nil, job_options = {})
         raise "Temporary print job has no data!" if data_string.empty?
 
         file = Tempfile.new('')
         file.puts(data_string)
         file.close
 
-        old_init(file.path, printer)
+        old_init(file.path, printer, job_options)
       end
 
     end
